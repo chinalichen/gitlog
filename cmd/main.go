@@ -2,21 +2,23 @@ package main
 
 import (
 	"fmt"
+	"log"
 	"os/exec"
+	"strings"
+
+	logprocess "github.com/chinalichen/gitlog/internal"
 )
 
 func main() {
-	// tempDir := os.TempDir()
-	cmd := exec.Command("git", "log --shortstat --pretty=format:'%h'")
-	rc, err := cmd.StdoutPipe()
-	if err != nil {
-		fmt.Print(err)
-	}
-	var out []byte
-	_, err = rc.Read(out)
-	if err != nil {
-		fmt.Printf("command exit with %d", cmd.ProcessState.ExitCode())
+	formatArgs := strings.Join([]string{"%h", "%p", "%an", "%ae", "%al", "%as", "%cN", "%ce", "%cl", "%cs", "%s"}, "#$@&")
+	formatStr := fmt.Sprintf("--pretty=format:'%s'", formatArgs)
+
+	log.Printf("will execute `%s`", strings.Join([]string{"git", "log", "--shortstat", formatStr}, " "))
+	cmd := exec.Command("git", "log", "--shortstat", formatStr)
+	if output, err := cmd.CombinedOutput(); err != nil {
+		log.Fatal(err)
 	} else {
-		fmt.Print(out)
+		result := logprocess.Process(string(output))
+		log.Print(result)
 	}
 }
