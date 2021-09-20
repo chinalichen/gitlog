@@ -4,10 +4,17 @@ import (
 	"log"
 	"os/exec"
 
-	logprocess "github.com/chinalichen/gitlog/internal"
+	"github.com/gin-gonic/gin"
+
+	"github.com/chinalichen/gitlog/api"
+	logprocess "github.com/chinalichen/gitlog/internal/logprocess"
 )
 
 func main() {
+	r := gin.Default()
+
+	api.GitLog(r)
+
 	cmd := exec.Command("git", logprocess.GetGitLotArgs()...)
 	output, err := cmd.CombinedOutput()
 	if err != nil {
