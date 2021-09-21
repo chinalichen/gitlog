@@ -46,6 +46,22 @@ func (r *Repository) init() {
 	})
 }
 
+func (r *Repository) GetGitLogInfo(name string) (GitLogInfo, error) {
+	var infoJson []byte
+	info := GitLogInfo{}
+	if err := r.db.View(func(tx *bolt.Tx) error {
+		infoJson = tx.Bucket([]byte(GIT_LOG_INFO)).Get([]byte(name))
+		return nil
+	}); err != nil {
+		return info, xerrors.Errorf("find info %s error: %w", name, err)
+	}
+	if len(infoJson) == 0 {
+		return info, xerrors.Errorf("GetGitLogInfo %s lenth is 0", name)
+	}
+	json.Unmarshal(infoJson, &info)
+	return info, nil
+}
+
 func (r *Repository) UpdateGitLogInfo(info GitLogInfo, batchTxIfNeeded *bolt.Tx) error {
 	if batchTxIfNeeded != nil {
 		return updateGitLogInfoImpl(info, batchTxIfNeeded)
@@ -56,12 +72,12 @@ func (r *Repository) UpdateGitLogInfo(info GitLogInfo, batchTxIfNeeded *bolt.Tx)
 }
 
 func updateGitLogInfoImpl(info GitLogInfo, tx *bolt.Tx) error {
-	json, err := json.Marshal(info)
+	infoJson, err := json.Marshal(info)
 	if err != nil {
 		return xerrors.Errorf("marshal GitLogInfo:%v error %w", info, err)
 	}
 	b := tx.Bucket([]byte(GIT_LOG_INFO))
-	return b.Put([]byte(info.Name), json)
+	return b.Put([]byte(info.Name), infoJson)
 }
 
 func (r *Repository) UpdateGitLogCSV(name string, content []byte, batchTxIfNeeded *bolt.Tx) error {

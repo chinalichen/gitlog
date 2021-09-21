@@ -13,3 +13,7 @@ func NewLogManager(dbFile string) *LogManager {
 	lm.r = repository.NewRepository(dbFile)
 	return lm
 }
+
+func (lm *LogManager) GetGitLogInfo(name string) (repository.GitLogInfo, error) {
+	return lm.r.GetGitLogInfo(name)
+}
