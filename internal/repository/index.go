@@ -67,7 +67,7 @@ func (r *Repository) UpdateGitLogInfo(info GitLogInfo, batchTxIfNeeded *bolt.Tx)
 		return updateGitLogInfoImpl(info, batchTxIfNeeded)
 	}
 	return r.db.Update(func(tx *bolt.Tx) error {
-		return updateGitLogInfoImpl(info, batchTxIfNeeded)
+		return updateGitLogInfoImpl(info, tx)
 	})
 }
 

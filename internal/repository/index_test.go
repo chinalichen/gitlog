@@ -7,5 +7,10 @@ import (
 
 func TestGetAndUpdateGitLogInfo(t *testing.T) {
 	r := NewRepository("test.db")
-	r.UpdateGitLogInfo(GitLogInfo{Name: "vscode", Status: GitLogInfoClone, ModifiedAt: time.Now()}, nil)
+	info := GitLogInfo{Name: "vscode", Status: GitLogInfoClone, ModifiedAt: time.Now()}
+	if err := r.UpdateGitLogInfo(info, nil); err != nil {
+		t.Fatalf("update git log info error %v", err)
+		return
+	}
+	
 }
