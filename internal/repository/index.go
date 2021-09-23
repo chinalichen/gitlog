@@ -80,6 +80,20 @@ func updateGitLogInfoImpl(info GitLogInfo, tx *bolt.Tx) error {
 	return b.Put([]byte(info.Name), infoJson)
 }
 
+func (r *Repository) GetGitLogCSV(name string) ([]byte, error) {
+	var content []byte
+	if err := r.db.View(func(tx *bolt.Tx) error {
+		content = tx.Bucket([]byte(GIT_LOG_CSV)).Get([]byte(name))
+		return nil
+	}); err != nil {
+		return nil, xerrors.Errorf("find csv %s error: %w", name, err)
+	}
+	if len(content) == 0 {
+		return nil, xerrors.Errorf("GetGitLogCSV %s lenth is 0", name)
+	}
+	return content, nil
+}
+
 func (r *Repository) UpdateGitLogCSV(name string, content []byte, batchTxIfNeeded *bolt.Tx) error {
 	if batchTxIfNeeded != nil {
 		return updateGitLogCSVImpl(name, content, batchTxIfNeeded)
@@ -96,4 +110,10 @@ func updateGitLogCSVImpl(name string, content []byte, batchTx *bolt.Tx) error {
 
 func (r *Repository) Batch(callback func(tx *bolt.Tx) error) {
 	r.db.Batch(callback)
+}
+
+func (r *Repository) Close() {
+	if r.db != nil {
+		r.db.Close()
+	}
 }
