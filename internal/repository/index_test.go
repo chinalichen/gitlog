@@ -7,6 +7,7 @@ import (
 
 func TestGetAndUpdateGitLogInfo(t *testing.T) {
 	r := NewRepository("test.db")
+	defer r.Close()
 	info := GitLogInfo{Name: "vscode", Status: GitLogInfoClone, ModifiedAt: time.Now()}
 	if err := r.UpdateGitLogInfo(info, nil); err != nil {
 		t.Fatalf("update git log info error %v", err)
@@ -33,6 +34,7 @@ func TestGetAndUpdateGitLogInfo(t *testing.T) {
 
 func TestGetAndUpdateGitCSV(t *testing.T) {
 	r := NewRepository("test.db")
+	defer r.Close()
 	content := []byte("col1,col2,col3\nv1,v2,v3")
 	if err := r.UpdateGitLogCSV("vscode", content, nil); err != nil {
 		t.Fatalf("get git log info error %v", err)
