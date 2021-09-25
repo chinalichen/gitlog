@@ -1,7 +1,10 @@
-package logprocess
+package gitprocess
 
 import (
 	"fmt"
+	"os"
+	"os/exec"
+	"path"
 	"regexp"
 	"strings"
 
@@ -11,6 +14,14 @@ import (
 const (
 	spliter = "$@#"
 )
+
+type GitProcessor struct {
+	rootPath string
+}
+
+func NewGetProcessor(rootPath string) *GitProcessor {
+	return &GitProcessor{rootPath: rootPath}
+}
 
 func GetGitLotArgs() []string {
 	formatArgs := strings.Join([]string{"%h", "%p", "%an", "%ae", "%al", "%as", "%cN", "%ce", "%cl", "%cs", "%s"}, spliter)
@@ -71,34 +82,37 @@ var parseDeletionOnly = genRegexpReplacer(`changed  ([0-9]+) deletion[s]?\(\+\)`
 var parseInsertion = genRegexpReplacer(`changed  ([0-9]+) insertion[s]?\(\+\)`, ",$1")
 var parseDeletion = genRegexpReplacer(`  ([0-9]+) deletion[s]?\(-\)`, ",$1")
 
-// func formatFileAndLines(source string) (string, error) {
-// 	fileExp, err := regexp.Compile(`\n ([0-9]+) file[s]? `)
-// 	if err != nil {
-// 		return "", err
-// 	}
-// 	fileOk := fileExp.ReplaceAll([]byte(source), []byte(",$1"))
-
-// 	deletionOnlyExp, err := regexp.Compile(`changed  ([0-9]+) deletion[s]?\(\+\)`)
-// 	if err != nil {
-// 		return "", err
-// 	}
-// 	deletionOnlyOk := deletionOnlyExp.ReplaceAll(fileOk, []byte(",0,$1"))
-
-// 	insertionExp, err := regexp.Compile(`changed  ([0-9]+) insertion[s]?\(\+\)`)
-// 	if err != nil {
-// 		return "", err
-// 	}
-// 	insertionOk := insertionExp.ReplaceAll(deletionOnlyOk, []byte(",$1"))
-
-// 	deletionExp, err := regexp.Compile(`  ([0-9]+) deletion[s]?\(-\)`)
-// 	if err != nil {
-// 		return "", err
-// 	}
-// 	deletionOk := deletionExp.ReplaceAll(insertionOk, []byte(",$1"))
-
-// 	return string(deletionOk), nil
-// }
-
 func removeEmptyLines(source string) (string, error) {
 	return strings.ReplaceAll(source, "\n\n", "\n"), nil
+}
+
+func (gp *GitProcessor) Clone(dir string, url string) error {
+	gitDir := path.Join(gp.rootPath, dir)
+	if _, err := os.Stat(gitDir); os.IsExist(err) || err == nil {
+		return nil
+	}
+	cmd := exec.Command("git", "clone", url, gitDir)
+	output, err := cmd.CombinedOutput()
+	if err != nil {
+		return xerrors.Errorf("clone git %s error: %w", url, err)
+	}
+	if strings.Contains(string(output), "100%") {
+		return xerrors.Errorf("clone git %s error: %w", url, output)
+	}
+	return nil
+}
+
+func (gp *GitProcessor) GitLog(dir string) (string, error) {
+	gitDir := path.Join(gp.rootPath, dir)
+	cmd := exec.Command("git", GetGitLotArgs()...)
+	cmd.Dir = gitDir
+	output, err := cmd.CombinedOutput()
+	if err != nil {
+		return "", xerrors.Errorf("git log error: %w", err)
+	}
+	result, err := Process(string(output))
+	if err != nil {
+		return "", xerrors.Errorf("convert git log to csv error: %w", err)
+	}
+	return result, nil
 }

@@ -34,7 +34,7 @@ func NewRepository(dbFile string) *Repository {
 func (r *Repository) init() {
 	buckets := []string{GIT_LOG_INFO, GIT_LOG_CSV}
 
-	// 生成 builtin 的bucket
+	// 生成 builtin 的 bucket
 	r.db.Update(func(tx *bolt.Tx) error {
 		for _, bucketName := range buckets {
 			_, err := tx.CreateBucketIfNotExists([]byte(bucketName))
@@ -46,17 +46,17 @@ func (r *Repository) init() {
 	})
 }
 
-func (r *Repository) GetGitLogInfo(name string) (GitLogInfo, error) {
+func (r *Repository) GetGitLogInfo(url string) (GitLogInfo, error) {
 	var infoJson []byte
 	info := GitLogInfo{}
 	if err := r.db.View(func(tx *bolt.Tx) error {
-		infoJson = tx.Bucket([]byte(GIT_LOG_INFO)).Get([]byte(name))
+		infoJson = tx.Bucket([]byte(GIT_LOG_INFO)).Get([]byte(url))
 		return nil
 	}); err != nil {
-		return info, xerrors.Errorf("find info %s error: %w", name, err)
+		return info, xerrors.Errorf("find info %s error: %w", url, err)
 	}
 	if len(infoJson) == 0 {
-		return info, xerrors.Errorf("GetGitLogInfo %s lenth is 0", name)
+		return info, xerrors.Errorf("GetGitLogInfo %s lenth is 0", url)
 	}
 	json.Unmarshal(infoJson, &info)
 	return info, nil
@@ -77,35 +77,35 @@ func updateGitLogInfoImpl(info GitLogInfo, tx *bolt.Tx) error {
 		return xerrors.Errorf("marshal GitLogInfo:%v error %w", info, err)
 	}
 	b := tx.Bucket([]byte(GIT_LOG_INFO))
-	return b.Put([]byte(info.Name), infoJson)
+	return b.Put([]byte(info.URL), infoJson)
 }
 
-func (r *Repository) GetGitLogCSV(name string) ([]byte, error) {
+func (r *Repository) GetGitLogCSV(url string) ([]byte, error) {
 	var content []byte
 	if err := r.db.View(func(tx *bolt.Tx) error {
-		content = tx.Bucket([]byte(GIT_LOG_CSV)).Get([]byte(name))
+		content = tx.Bucket([]byte(GIT_LOG_CSV)).Get([]byte(url))
 		return nil
 	}); err != nil {
-		return nil, xerrors.Errorf("find csv %s error: %w", name, err)
+		return nil, xerrors.Errorf("find csv %s error: %w", url, err)
 	}
 	if len(content) == 0 {
-		return nil, xerrors.Errorf("GetGitLogCSV %s lenth is 0", name)
+		return nil, xerrors.Errorf("GetGitLogCSV %s lenth is 0", url)
 	}
 	return content, nil
 }
 
-func (r *Repository) UpdateGitLogCSV(name string, content []byte, batchTxIfNeeded *bolt.Tx) error {
+func (r *Repository) UpdateGitLogCSV(url string, content []byte, batchTxIfNeeded *bolt.Tx) error {
 	if batchTxIfNeeded != nil {
-		return updateGitLogCSVImpl(name, content, batchTxIfNeeded)
+		return updateGitLogCSVImpl(url, content, batchTxIfNeeded)
 	}
 	return r.db.Update(func(tx *bolt.Tx) error {
-		return updateGitLogCSVImpl(name, content, tx)
+		return updateGitLogCSVImpl(url, content, tx)
 	})
 }
 
-func updateGitLogCSVImpl(name string, content []byte, batchTx *bolt.Tx) error {
+func updateGitLogCSVImpl(url string, content []byte, batchTx *bolt.Tx) error {
 	b := batchTx.Bucket([]byte(GIT_LOG_CSV))
-	return b.Put([]byte(name), content)
+	return b.Put([]byte(url), content)
 }
 
 func (r *Repository) Batch(callback func(tx *bolt.Tx) error) {

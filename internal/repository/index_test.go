@@ -8,18 +8,18 @@ import (
 func TestGetAndUpdateGitLogInfo(t *testing.T) {
 	r := NewRepository("test.db")
 	defer r.Close()
-	info := GitLogInfo{Name: "vscode", Status: GitLogInfoClone, ModifiedAt: time.Now()}
+	info := GitLogInfo{URL: "vscode", Status: GitLogInfoClone, ModifiedAt: time.Now()}
 	if err := r.UpdateGitLogInfo(info, nil); err != nil {
 		t.Fatalf("update git log info error %v", err)
 		return
 	}
-	fetchInfo, err := r.GetGitLogInfo(info.Name)
+	fetchInfo, err := r.GetGitLogInfo(info.URL)
 	if err != nil {
 		t.Fatalf("get git log info error %v", err)
 		return
 	}
-	if fetchInfo.Name != info.Name {
-		t.Fatalf("expect %s, but got %s", info.Name, fetchInfo.Name)
+	if fetchInfo.URL != info.URL {
+		t.Fatalf("expect %s, but got %s", info.URL, fetchInfo.URL)
 		return
 	}
 	if fetchInfo.Status != info.Status {

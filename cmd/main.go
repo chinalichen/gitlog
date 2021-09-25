@@ -1,28 +1,26 @@
 package main
 
 import (
+	"os"
+
 	"github.com/gin-gonic/gin"
 
 	"github.com/chinalichen/gitlog/api"
+	"github.com/chinalichen/gitlog/internal/controller"
+	"github.com/chinalichen/gitlog/internal/gitprocess"
+	"github.com/chinalichen/gitlog/internal/repository"
 )
 
 func main() {
 	r := gin.Default()
 
-	gitLogApi := api.NewGitLogApiWrapper("./gitlog.db")
-	gitLogApi.BindHandlers(r)
+	repo := repository.NewRepository("./gitlog.db")
+	gp := gitprocess.NewGetProcessor(os.TempDir())
+	manager := controller.NewLogManager(repo, gp)
+	gitLogApi := api.NewGitLogApiWrapper(manager)
 
-	// cmd := exec.Command("git", logprocess.GetGitLotArgs()...)
-	// output, err := cmd.CombinedOutput()
-	// if err != nil {
-	// 	log.Fatal(err)
-	// 	return
-	// }
-	// result, err := logprocess.Process(string(output))
-	// if err != nil {
-	// 	log.Fatal(err)
-	// 	return
-	// }
-	// log.Print(result)
+	r.GET("/git/info", gitLogApi.GetGitLogInfo)
+	r.GET("/git/csv", gitLogApi.GetGitLogCSV)
+
 	r.Run(":12389")
 }

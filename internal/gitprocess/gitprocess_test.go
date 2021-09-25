@@ -1,6 +1,8 @@
-package logprocess
+package gitprocess
 
 import (
+	"fmt"
+	"os"
 	"strings"
 	"testing"
 )
@@ -40,4 +42,18 @@ func TestReplaceComma(t *testing.T) {
 	if index != -1 {
 		t.Errorf("acutal has invalid ',' at %d ", index)
 	}
+}
+
+func TestGitOperations(t *testing.T) {
+	gp := GitProcessor{rootPath: os.TempDir()}
+	dir := "gitlog"
+	url := "https://github.com/chinalichen/gitlog.git"
+	if err := gp.Clone(dir, url); err != nil {
+		t.Fatalf("git clone error %v", err)
+	}
+	csv, err := gp.GitLog(dir)
+	if err != nil {
+		t.Fatalf("git log error %v", err)
+	}
+	fmt.Printf("gitlog.csv: %s", csv)
 }

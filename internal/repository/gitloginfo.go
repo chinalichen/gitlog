@@ -12,7 +12,8 @@ const (
 )
 
 type GitLogInfo struct {
-	Name       string           `json:"name"`
+	URL        string           `json:"url"`
+	Path       string           `json:"path"`
 	Status     GitLogInfoStatus `json:"status"`
 	ModifiedAt time.Time        `json:"modifiedAt"`
 }
