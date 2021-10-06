@@ -4,8 +4,8 @@ import (
 	"sync"
 	"time"
 
-	"github.com/chinalichen/gitlog/internal/gitprocess"
 	"github.com/chinalichen/gitlog/internal/repository"
+	"github.com/chinalichen/gitlog/pkg/gitprocess"
 	"github.com/google/uuid"
 	"go.etcd.io/bbolt"
 )

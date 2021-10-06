@@ -3,6 +3,7 @@ package gitprocess
 import (
 	"fmt"
 	"os"
+	"path"
 	"strings"
 	"testing"
 )
@@ -55,5 +56,6 @@ func TestGitOperations(t *testing.T) {
 	if err != nil {
 		t.Fatalf("git log error %v", err)
 	}
+	defer os.Remove(path.Join(os.TempDir(), dir))
 	fmt.Printf("gitlog.csv: %s", csv)
 }

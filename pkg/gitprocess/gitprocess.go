@@ -1,13 +1,17 @@
 package gitprocess
 
 import (
+	"bytes"
 	"fmt"
+	"io/ioutil"
 	"os"
 	"os/exec"
 	"path"
 	"regexp"
 	"strings"
 
+	"golang.org/x/text/encoding/simplifiedchinese"
+	"golang.org/x/text/transform"
 	"golang.org/x/xerrors"
 )
 
@@ -40,6 +44,9 @@ func Process(source string) (string, error) {
 		parseInsertion,
 		parseDeletion,
 		removeEmptyLines,
+		removeSingleQuote,
+		addHedaer,
+		utf8ToGb,
 	}
 
 	result := source
@@ -79,11 +86,30 @@ func genRegexpReplacer(expr string, repl string) func(source string) (string, er
 
 var parseFile = genRegexpReplacer(`\n ([0-9]+) file[s]? `, ",$1")
 var parseDeletionOnly = genRegexpReplacer(`changed  ([0-9]+) deletion[s]?\(\+\)`, ",0,$1")
-var parseInsertion = genRegexpReplacer(`changed  ([0-9]+) insertion[s]?\(\+\)`, ",$1")
+var parseInsertion = genRegexpReplacer(`changed  ([0-9]+) insertion[ s]?\(\+\)`, ",$1")
 var parseDeletion = genRegexpReplacer(`  ([0-9]+) deletion[s]?\(-\)`, ",$1")
 
 func removeEmptyLines(source string) (string, error) {
 	return strings.ReplaceAll(source, "\n\n", "\n"), nil
+}
+
+func removeSingleQuote(s string) (string, error) {
+	return strings.ReplaceAll(s, "'", ""), nil
+}
+
+func addHedaer(s string) (string, error) {
+	// Todo: refactor string concat
+	header := "Commit hash,提交时间,提交者,合并者"
+	return fmt.Sprintf("%s\n%s", header, s), nil
+}
+
+func utf8ToGb(s string) (string, error) {
+	reader := transform.NewReader(bytes.NewReader([]byte(s)), simplifiedchinese.GB18030.NewEncoder())
+	d, e := ioutil.ReadAll(reader)
+	if e != nil {
+		return "", e
+	}
+	return string(d), nil
 }
 
 func (gp *GitProcessor) Clone(dir string, url string) error {

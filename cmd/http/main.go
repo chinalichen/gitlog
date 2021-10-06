@@ -7,8 +7,8 @@ import (
 
 	"github.com/chinalichen/gitlog/api"
 	"github.com/chinalichen/gitlog/internal/controller"
-	"github.com/chinalichen/gitlog/internal/gitprocess"
 	"github.com/chinalichen/gitlog/internal/repository"
+	"github.com/chinalichen/gitlog/pkg/gitprocess"
 )
 
 func main() {
