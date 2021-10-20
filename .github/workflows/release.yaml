@@ -1,6 +1,8 @@
 # .github/workflows/release.yaml
 
-on: release
+on: 
+  release:
+    types: [published]
 name: Build Release
 jobs:
   release-linux-386:
@@ -9,7 +11,7 @@ jobs:
     steps:
     - uses: actions/checkout@master
     - name: compile and release
-      uses: ngs/go-release.action@v1.0.1
+      uses: ConsulTent/go-release.action@v1.0.5
       env:
         CMD_PATH: cmd/csvlog/main.go
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
@@ -22,7 +24,7 @@ jobs:
     steps:
     - uses: actions/checkout@master
     - name: compile and release
-      uses: ngs/go-release.action@v1.0.1
+      uses: ConsulTent/go-release.action@v1.0.5
       env:
         CMD_PATH: cmd/csvlog/main.go
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
@@ -35,7 +37,7 @@ jobs:
     steps:
     - uses: actions/checkout@master
     - name: compile and release
-      uses: ngs/go-release.action@v1.0.1
+      uses: ConsulTent/go-release.action@v1.0.5
       env:
         CMD_PATH: cmd/csvlog/main.go
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
@@ -48,7 +50,7 @@ jobs:
     steps:
     - uses: actions/checkout@master
     - name: compile and release
-      uses: ngs/go-release.action@v1.0.1
+      uses: ConsulTent/go-release.action@v1.0.5
       env:
         CMD_PATH: cmd/csvlog/main.go
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
@@ -61,7 +63,7 @@ jobs:
     steps:
     - uses: actions/checkout@master
     - name: compile and release
-      uses: ngs/go-release.action@v1.0.1
+      uses: ConsulTent/go-release.action@v1.0.5
       env:
         CMD_PATH: cmd/csvlog/main.go
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
@@ -74,7 +76,7 @@ jobs:
     steps:
     - uses: actions/checkout@master
     - name: compile and release
-      uses: ngs/go-release.action@v1.0.1
+      uses: ConsulTent/go-release.action@v1.0.5
       env:
         CMD_PATH: cmd/csvlog/main.go
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
@@ -87,7 +89,7 @@ jobs:
     steps:
     - uses: actions/checkout@master
     - name: compile and release
-      uses: ngs/go-release.action@v1.0.1
+      uses: ConsulTent/go-release.action@v1.0.5
       env:
         CMD_PATH: cmd/csvlog/main.go
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
