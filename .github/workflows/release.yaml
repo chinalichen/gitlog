@@ -13,6 +13,7 @@ jobs:
     - name: compile and release
       uses: ConsulTent/go-release.action@v1.05
       env:
+        PROJECT_NAME: csvlog
         CMD_PATH: cmd/csvlog/main.go
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         GOARCH: "386"
@@ -26,6 +27,7 @@ jobs:
     - name: compile and release
       uses: ConsulTent/go-release.action@v1.05
       env:
+        PROJECT_NAME: csvlog
         CMD_PATH: cmd/csvlog/main.go
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         GOARCH: amd64
@@ -39,6 +41,7 @@ jobs:
     - name: compile and release
       uses: ConsulTent/go-release.action@v1.05
       env:
+        PROJECT_NAME: csvlog
         CMD_PATH: cmd/csvlog/main.go
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         GOARCH: "arm"
@@ -52,6 +55,7 @@ jobs:
     - name: compile and release
       uses: ConsulTent/go-release.action@v1.05
       env:
+        PROJECT_NAME: csvlog
         CMD_PATH: cmd/csvlog/main.go
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         GOARCH: arm64
@@ -65,6 +69,7 @@ jobs:
     - name: compile and release
       uses: ConsulTent/go-release.action@v1.05
       env:
+        PROJECT_NAME: csvlog
         CMD_PATH: cmd/csvlog/main.go
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         GOARCH: amd64
@@ -78,6 +83,7 @@ jobs:
     - name: compile and release
       uses: ConsulTent/go-release.action@v1.05
       env:
+        PROJECT_NAME: csvlog
         CMD_PATH: cmd/csvlog/main.go
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         GOARCH: "386"
@@ -91,6 +97,7 @@ jobs:
     - name: compile and release
       uses: ConsulTent/go-release.action@v1.05
       env:
+        PROJECT_NAME: csvlog
         CMD_PATH: cmd/csvlog/main.go
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         GOARCH: amd64
