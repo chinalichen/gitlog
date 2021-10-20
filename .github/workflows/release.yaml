@@ -11,7 +11,7 @@ jobs:
     steps:
     - uses: actions/checkout@master
     - name: compile and release
-      uses: ConsulTent/go-release.action@v1.0.5
+      uses: ConsulTent/go-release.action@v1.05
       env:
         CMD_PATH: cmd/csvlog/main.go
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
@@ -24,7 +24,7 @@ jobs:
     steps:
     - uses: actions/checkout@master
     - name: compile and release
-      uses: ConsulTent/go-release.action@v1.0.5
+      uses: ConsulTent/go-release.action@v1.05
       env:
         CMD_PATH: cmd/csvlog/main.go
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
@@ -37,7 +37,7 @@ jobs:
     steps:
     - uses: actions/checkout@master
     - name: compile and release
-      uses: ConsulTent/go-release.action@v1.0.5
+      uses: ConsulTent/go-release.action@v1.05
       env:
         CMD_PATH: cmd/csvlog/main.go
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
@@ -50,7 +50,7 @@ jobs:
     steps:
     - uses: actions/checkout@master
     - name: compile and release
-      uses: ConsulTent/go-release.action@v1.0.5
+      uses: ConsulTent/go-release.action@v1.05
       env:
         CMD_PATH: cmd/csvlog/main.go
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
@@ -63,7 +63,7 @@ jobs:
     steps:
     - uses: actions/checkout@master
     - name: compile and release
-      uses: ConsulTent/go-release.action@v1.0.5
+      uses: ConsulTent/go-release.action@v1.05
       env:
         CMD_PATH: cmd/csvlog/main.go
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
@@ -76,7 +76,7 @@ jobs:
     steps:
     - uses: actions/checkout@master
     - name: compile and release
-      uses: ConsulTent/go-release.action@v1.0.5
+      uses: ConsulTent/go-release.action@v1.05
       env:
         CMD_PATH: cmd/csvlog/main.go
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
@@ -89,7 +89,7 @@ jobs:
     steps:
     - uses: actions/checkout@master
     - name: compile and release
-      uses: ConsulTent/go-release.action@v1.0.5
+      uses: ConsulTent/go-release.action@v1.05
       env:
         CMD_PATH: cmd/csvlog/main.go
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
