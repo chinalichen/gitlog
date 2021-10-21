@@ -13,12 +13,10 @@ jobs:
     - name: compile and release
       uses: chinalichen/go-release.action@master
       env:
-        PROJECT_NAME: csvlog
         CMD_PATH: cmd/csvlog/main.go
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         GOARCH: "386"
         GOOS: linux
-        EXTRA_FILES: "LICENSE"
   release-linux-amd64:
     name: release linux/amd64
     runs-on: ubuntu-latest
@@ -27,12 +25,10 @@ jobs:
     - name: compile and release
       uses: chinalichen/go-release.action@master
       env:
-        PROJECT_NAME: csvlog
         CMD_PATH: cmd/csvlog/main.go
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         GOARCH: amd64
         GOOS: linux
-        EXTRA_FILES: "LICENSE"
   release-linux-arm:
     name: release linux/386
     runs-on: ubuntu-latest
@@ -41,12 +37,10 @@ jobs:
     - name: compile and release
       uses: chinalichen/go-release.action@master
       env:
-        PROJECT_NAME: csvlog
         CMD_PATH: cmd/csvlog/main.go
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         GOARCH: "arm"
         GOOS: linux
-        EXTRA_FILES: "LICENSE"
   release-linux-arm64:
     name: release linux/amd64
     runs-on: ubuntu-latest
@@ -55,12 +49,10 @@ jobs:
     - name: compile and release
       uses: chinalichen/go-release.action@master
       env:
-        PROJECT_NAME: csvlog
         CMD_PATH: cmd/csvlog/main.go
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         GOARCH: arm64
         GOOS: linux
-        EXTRA_FILES: "LICENSE"
   release-darwin-amd64:
     name: release darwin/amd64
     runs-on: ubuntu-latest
@@ -69,12 +61,10 @@ jobs:
     - name: compile and release
       uses: chinalichen/go-release.action@master
       env:
-        PROJECT_NAME: csvlog
         CMD_PATH: cmd/csvlog/main.go
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         GOARCH: amd64
         GOOS: darwin
-        EXTRA_FILES: "LICENSE"
   release-windows-386:
     name: release windows/386
     runs-on: ubuntu-latest
@@ -83,12 +73,10 @@ jobs:
     - name: compile and release
       uses: chinalichen/go-release.action@master
       env:
-        PROJECT_NAME: csvlog
         CMD_PATH: cmd/csvlog/main.go
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         GOARCH: "386"
         GOOS: windows
-        EXTRA_FILES: "LICENSE"
   release-windows-amd64:
     name: release windows/amd64
     runs-on: ubuntu-latest
@@ -97,9 +85,7 @@ jobs:
     - name: compile and release
       uses: chinalichen/go-release.action@master
       env:
-        PROJECT_NAME: csvlog
         CMD_PATH: cmd/csvlog/main.go
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         GOARCH: amd64
         GOOS: windows
-        EXTRA_FILES: "LICENSE"
