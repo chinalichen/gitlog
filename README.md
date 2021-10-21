@@ -1,5 +1,7 @@
 # gitlog
 
+![platforms](https://img.shields.io/badge/platform-mac%20OS%20%7C%20Windows%20%7C%20Linux-green)
+
 生成 git 仓库的 commit 日志。本仓库的 [gitlog.csv](./docs/gitlog.csv)。
 
 ## 用法

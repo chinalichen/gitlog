@@ -42,7 +42,7 @@ func TestProcess(t *testing.T) {
 		}
 	}
 
-	expect := `Commit hash,Parent hashes,作者,邮箱,邮箱名,提交时间,提交日期,合并者,合并者邮箱,合并时间,合并日期,提交信息,文件变化数,新增行数,删除行数,合并时间
+	expect := `Commit hash,Parent hashes,作者,邮箱,邮箱名,提交日期,合并者,合并者邮箱,合并时间,合并日期,提交信息,文件变化数,新增行数,删除行数
 a621336,2af69e1,chinalichen,chinalichen@126.com,chinalichen,2021-09-17,chinalichen,chinalichen@126.com,chinalichen,2021-09-17,add string process code,4,75,11
 2af69e1,4256812,lc,lc@lcs-iMac.local,lc,2021-09-15,lc,lc@lcs-iMac.local,lc,2021-09-15,init,3,28,1
 4256812,,lichen,chinalichen@126.com,chinalichen,2021-09-15,GitHub,noreply@github.com,noreply,2021-09-15,Initial commit,1,1
