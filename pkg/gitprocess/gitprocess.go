@@ -99,7 +99,7 @@ func removeSingleQuote(s string) (string, error) {
 
 func addHedaer(s string) (string, error) {
 	// Todo: refactor string concat
-	header := "Commit hash,Parent hashes,作者,邮箱,邮箱名,提交时间,提交日期,合并者,合并者邮箱,合并时间,合并日期,提交信息,文件变化数,新增行数,删除行数,合并时间"
+	header := "Commit hash,Parent hashes,作者,邮箱,邮箱名,提交日期,合并者,合并者邮箱,合并时间,合并日期,提交信息,文件变化数,新增行数,删除行数"
 	return fmt.Sprintf("%s\n%s", header, s), nil
 }
 

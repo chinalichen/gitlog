@@ -1,0 +1,28 @@
+Commit hash,Parent hashes,作者,邮箱,邮箱名,提交时间,提交日期,合并者,合并者邮箱,合并时间,合并日期,提交信息,文件变化数,新增行数,删除行数,合并时间
+b1945bd,3bf2ece,chinalichen,chinalichen@126.com,chinalichen,2021-10-21,chinalichen,chinalichen@126.com,chinalichen,2021-10-21,extra_files is needed,1,1
+3bf2ece,0874881,chinalichen,chinalichen@126.com,chinalichen,2021-10-21,chinalichen,chinalichen@126.com,chinalichen,2021-10-21,extra_files is needed,1,6,6
+0874881,54195dc,chinalichen,chinalichen@126.com,chinalichen,2021-10-21,chinalichen,chinalichen@126.com,chinalichen,2021-10-21,project name is gitlog,1,13
+54195dc,0128ae0,chinalichen,chinalichen@126.com,chinalichen,2021-10-21,chinalichen,chinalichen@126.com,chinalichen,2021-10-21,remove license file in release pack,1changed,14
+0128ae0,8b37f8d,chinalichen,chinalichen@126.com,chinalichen,2021-10-21,chinalichen,chinalichen@126.com,chinalichen,2021-10-21,use 1.17 go build,1,7,7
+8b37f8d,359b430,willi,chinalichen@126.com,chinalichen,2021-10-20,willi,chinalichen@126.com,chinalichen,2021-10-20,debug release workflow,1,7
+359b430,19f449e,willi,chinalichen@126.com,chinalichen,2021-10-20,willi,chinalichen@126.com,chinalichen,2021-10-20,use ConsulTent/go-release.action@v1.05 build workflow,1,7,7
+19f449e,9f44880,willi,chinalichen@126.com,chinalichen,2021-10-20,willi,chinalichen@126.com,chinalichen,2021-10-20,use ConsulTent/go-release.action@v1.0.5 build workflow,1,10,8
+9f44880,9e29524,willi,chinalichen@126.com,chinalichen,2021-10-20,willi,chinalichen@126.com,chinalichen,2021-10-20,增加csvlog binary release action,1,7
+9e29524,48a0f2c,willi,chinalichen@126.com,chinalichen,2021-10-20,willi,chinalichen@126.com,chinalichen,2021-10-20,添加release action,1,89
+48a0f2c,491479b,willi,chinalichen@126.com,chinalichen,2021-10-14,willi,chinalichen@126.com,chinalichen,2021-10-14,fix: 修复UT和build问题,3,25,7
+491479b,2f5fa6b,willi,chinalichen@126.com,chinalichen,2021-10-14,willi,chinalichen@126.com,chinalichen,2021-10-14,chore: 构建,1,1,1
+2f5fa6b,e2626ef,willi,chinalichen@126.com,chinalichen,2021-10-14,willi,chinalichen@126.com,chinalichen,2021-10-14,chore: 添加构建脚本,1,5
+e2626ef,df6766c,lichen,chinalichen@126.com,chinalichen,2021-10-14,GitHub,noreply@github.com,noreply,2021-10-14,Create go.yml,1,25
+df6766c,5eec896,willi,chinalichen@126.com,chinalichen,2021-10-06,willi,chinalichen@126.com,chinalichen,2021-10-06,feat: 添加命令行工具,5,48,3
+5eec896,b5f6491,chinalichen,chinalichen@126.com,chinalichen,2021-09-25,chinalichen,chinalichen@126.com,chinalichen,2021-09-25,api ok,11,284,90
+b5f6491,2b8dcc9,willi,chinalichen@126.com,chinalichen,2021-09-25,willi,chinalichen@126.com,chinalichen,2021-09-25,git clone,2,43,3
+2b8dcc9,656297b,willi,chinalichen@126.com,chinalichen,2021-09-23,willi,chinalichen@126.com,chinalichen,2021-09-23,添加gitCSV接口和UT,2,55,1
+656297b,2424acc,willi,chinalichen@126.com,chinalichen,2021-09-23,willi,chinalichen@126.com,chinalichen,2021-09-23,修复update的问,2,7,2
+2424acc,7f89802,willi,chinalichen@126.com,chinalichen,2021-09-23,willi,chinalichen@126.com,chinalichen,2021-09-23,添加repository层测试,2,12,1
+7f89802,9165053,willi,chinalichen@126.com,chinalichen,2021-09-23,willi,chinalichen@126.com,chinalichen,2021-09-23,修改绑定的端口号 添加gitignore,2,2,1
+9165053,a31ffff,chinalichen,chinalichen@126.com,chinalichen,2021-09-21,chinalichen,chinalichen@126.com,chinalichen,2021-09-21,add api handlers,4,73,21
+a31ffff,dc82580,chinalichen,chinalichen@126.com,chinalichen,2021-09-20,chinalichen,chinalichen@126.com,chinalichen,2021-09-20,add repository,9,198,2
+dc82580,a621336,chinalichen,chinalichen@126.com,chinalichen,2021-09-18,chinalichen,chinalichen@126.com,chinalichen,2021-09-18,git log to csv ok.,5,117,29
+a621336,2af69e1,chinalichen,chinalichen@126.com,chinalichen,2021-09-17,chinalichen,chinalichen@126.com,chinalichen,2021-09-17,add string process code,4,75,11
+2af69e1,4256812,lc,lc@lcs-iMac.local,lc,2021-09-15,lc,lc@lcs-iMac.local,lc,2021-09-15,init,3,28,1
+4256812,,lichen,chinalichen@126.com,chinalichen,2021-09-15,GitHub,noreply@github.com,noreply,2021-09-15,Initial commit,1,1
